@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'models/shoe.dart';
+import '../models/shoe.dart';
 
 class ShoeTile extends StatelessWidget {
   Shoe shoe;
-  ShoeTile({super.key, required this.shoe});
+  void Function()? onTap;
+  ShoeTile({
+    super.key,
+    required this.shoe,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +23,23 @@ class ShoeTile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Shoe Pic
+          // shoe pic
           ClipRRect(
+            borderRadius: BorderRadius.circular(12),
             child: Image.asset(shoe.imagePath),
           ),
 
-          //text
-          Text(
-            shoe.description,
-            style: TextStyle(color: Colors.grey[600]),
-          ),
-
-          // Price Details
+          // description
           Padding(
-            padding: const EdgeInsets.only(left: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Text(
+              shoe.description,
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+          ),
+          // price + details
+          Padding(
+            padding: const EdgeInsets.only(left: 25.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,14 +50,10 @@ class ShoeTile extends StatelessWidget {
                     // Shoe Name
                     Text(
                       shoe.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
-                    ),
-
-                    const SizedBox(
-                      height: 5,
                     ),
 
                     // Price
@@ -61,25 +65,28 @@ class ShoeTile extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      bottomRight: Radius.circular(12),
+
+                // plus button
+                GestureDetector(
+                  onTap: onTap,
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
                     ),
-                  ),
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.white,
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
-
-          // Button add to cart
+          )
         ],
       ),
     );

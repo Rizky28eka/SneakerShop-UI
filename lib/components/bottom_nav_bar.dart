@@ -3,7 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 class MyButtomNavBar extends StatelessWidget {
   void Function(int)? onTabChange;
-  MyButtomNavBar({super.key,required this.onTabChange});
+  MyButtomNavBar({super.key, required this.onTabChange});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +15,7 @@ class MyButtomNavBar extends StatelessWidget {
         tabActiveBorder: Border.all(color: Colors.white),
         tabBackgroundColor: Colors.grey.shade100,
         mainAxisAlignment: MainAxisAlignment.center,
+        gap: 8,
         tabBorderRadius: 16,
         onTabChange: (value) => onTabChange!(value),
         tabs: const [
